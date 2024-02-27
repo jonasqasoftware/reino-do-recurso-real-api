@@ -1,0 +1,5 @@
+[
+  { "id": 1, "simbolo": "ᚠ", "significado": "Conhecimento", "poder": "Desbloqueia sabedoria oculta nos dados." },
+  { "id": 2, "simbolo": "ᚢ", "significado": "Transformação", "poder": "Capaz de transformar dados em formas desejadas." },
+  { "id": 3, "simbolo": "ᚦ", "significado": "Desafio", "poder": "Introduz desafios para aprimorar habilidades de programação." }
+]
