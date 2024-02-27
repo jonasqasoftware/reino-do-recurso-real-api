@@ -1,0 +1,5 @@
+[
+  { "id": 1, "dica": "Utilize variáveis constantes para melhorar a legibilidade do seu código." },
+  { "id": 2, "dica": "Evite duplicação de código usando funções reutilizáveis." },
+  { "id": 3, "dica": "Explore as últimas features do JavaScript para uma codificação mais eficiente." }
+]
