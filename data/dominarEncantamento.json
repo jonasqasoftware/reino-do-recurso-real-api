@@ -1,0 +1,5 @@
+[
+  { "id": 1, "habilidade": "Transformação de Dados", "descricao": "Aprenda a arte de transformar dados brutos em informações valiosas." },
+  { "id": 2, "habilidade": "Visualização Mágica", "descricao": "Domine a criação de visualizações mágicas para análise de dados." },
+  { "id": 3, "habilidade": "Invocação de APIs", "descricao": "Saiba como invocar os poderes de APIs para obter conhecimento externo." }
+]
