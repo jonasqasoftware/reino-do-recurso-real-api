@@ -1,0 +1,5 @@
+[
+  { "id": 1, "nome": "Elixir da Inspiração", "efeito": "Aumenta a criatividade ao programar." },
+  { "id": 2, "nome": "Elixir da Concentração", "efeito": "Melhora a concentração e foco durante a codificação." },
+  { "id": 3, "nome": "Elixir da Resolução de Bugs", "efeito": "Ajuda a encontrar e resolver bugs mais rapidamente." }
+]
