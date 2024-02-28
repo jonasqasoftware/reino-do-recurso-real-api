@@ -1,0 +1,32 @@
+{
+  "version": 2,
+  "builds": [{ "src": "index.js", "use": "@vercel/node" }],
+  "routes": [
+
+    {
+      "src": "/convocarMago",
+      "dest": "/index.js",
+      "methods": ["GET"]
+    },
+    {
+      "src": "/dominarEncantamento",
+      "dest": "/index.js",
+      "methods": ["GET"]
+    },
+    {
+      "src": "/examinarPergaminho/:id",
+      "dest": "/index.js",
+      "methods": ["GET"]
+    },
+    {
+      "src": "/elixir",
+      "dest": "/index.js",
+      "methods": ["GET"]
+    },
+    {
+      "src": "/runas",
+      "dest": "/index.js",
+      "methods": ["GET"]
+    }
+  ]
+}
