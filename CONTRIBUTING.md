@@ -110,6 +110,56 @@ Além disso, para facilitar a criação de versões e changelog, usamos [Standar
 
 Seguindo essas práticas, manteremos nosso histórico de commits consistente, facilitando a rastreabilidade das mudanças e a geração de changelog automaticamente. Contribua de forma eficaz usando este processo!
 
+# Comandos do Vercel
+
+Este documento fornece uma visão geral dos principais comandos do Vercel que você pode usar ao trabalhar com seu projeto.
+
+## 1. Instalação do Vercel CLI
+
+Certifique-se de ter o Vercel CLI instalado globalmente em sua máquina. Você pode instalá-lo usando o seguinte comando:
+
+```bash
+npm install -g vercel
+```
+
+## 2. Iniciar um novo projeto
+
+Para iniciar um novo projeto no Vercel, use o seguinte comando e siga as instruções interativas:
+
+```bash
+vercel
+```
+
+### **3. Fazer deploy**
+
+Use o comando a seguir para fazer o deploy do seu projeto:
+
+```bash
+vercel
+```
+
+Este comando inicia o processo de implantação e fornece a URL do seu projeto implantado.
+
+### **4. Deploy de produção**
+
+Se desejar fazer deploy diretamente para o ambiente de produção, utilize o seguinte comando:
+
+```bash
+vercel --prod
+```
+
+Isso substituirá a implantação existente no ambiente de produção.
+
+### **5. Abrir o painel Vercel**
+
+Para abrir o painel do Vercel no navegador, utilize:
+
+```bash
+vercel open
+```
+
+Este comando abrirá o painel onde você pode gerenciar seus projetos implantados.
+
 ## Código de Conduta
 
 Este projeto segue o [Código de Conduta do Colaborador da All Contributors](https://allcontributors.org/docs/en/code-of-conduct). Ao contribuir, você concorda em seguir este código.
