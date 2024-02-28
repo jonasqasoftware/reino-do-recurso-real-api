@@ -6,9 +6,10 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 // Importa dados para as rotas
 const convocarMagoData = require('./data/convocarMago.json');
-const dominarEncantamentoData = require('./data/examinarPergaminho/dominarEncantamento..json');
+const dominarEncantamentoData = require('./data/examinarPergaminho/1.json');
 const elixirData = require('./data/elixir.json');
 const runasData = require('./data/runas.json');
+
 
 // Configuração do Swagger
 const options = {
@@ -23,9 +24,13 @@ const options = {
   apis: ['index.js'],
 };
 
+
 const specs = swaggerJsdoc(options);
 
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
+// Ajuste os caminhos relativos para apontar para as pastas corretas
+const swaggerUiPath = 'caminho/para/swagger-ui-dist';  // Substitua pelo caminho correto
+
+app.use('/', swaggerUi.serve, swaggerUi.setup(specs, { swaggerUiPath }));
 
 // Função para adicionar detalhes ao Swagger
 const addSwaggerDetails = (path, description, responses) => ({
@@ -51,6 +56,33 @@ app.get('/convocarMago', (req, res) => {
   res.status(200).json(convocarMagoData);
 });
 
+/**
+ * @swagger
+ * /examinarPergaminho/{id}:
+ *   get:
+ *     description: Desvenda os mistérios de um pergaminho específico no reino.
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: ID único do pergaminho.
+ *         schema:
+ *           type: integer
+ *     responses:
+ *       200:
+ *         description: Feitiço bem-sucedido, dados prontos para serem explorados.
+ */
+app.get('/examinarPergaminho/:id', (req, res) => {
+  const pergaminhoId = req.params.id;
+  const filePath = `./data/examinarPergaminho/${pergaminhoId}.json`;
+
+  try {
+    const examinarPergaminhoData = require(filePath);
+    res.status(200).json(examinarPergaminhoData);
+  } catch (error) {
+    res.status(404).json({ mensagem: 'Pergaminho não encontrado' });
+  }
+});
 /**
  * @swagger
  * /dominarEncantamento:
