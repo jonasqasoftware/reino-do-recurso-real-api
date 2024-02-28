@@ -11,7 +11,8 @@ const elixirData = require('./data/elixir.json');
 const runasData = require('./data/runas.json');
 
 
-// Configuração do Swagger
+// Configuração do Swaggervercel dev
+
 const options = {
   definition: {
     openapi: '3.0.0',
@@ -26,11 +27,8 @@ const options = {
 
 
 const specs = swaggerJsdoc(options);
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
 
-// Ajuste os caminhos relativos para apontar para as pastas corretas
-const swaggerUiPath = 'caminho/para/swagger-ui-dist';  // Substitua pelo caminho correto
-
-app.use('/', swaggerUi.serve, swaggerUi.setup(specs, { swaggerUiPath }));
 
 // Função para adicionar detalhes ao Swagger
 const addSwaggerDetails = (path, description, responses) => ({

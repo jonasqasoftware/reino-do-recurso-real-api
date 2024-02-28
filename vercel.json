@@ -1,32 +1,16 @@
 {
   "version": 2,
-  "builds": [{ "src": "index.js", "use": "@vercel/node" }],
+  "builds": [
+    { "src": "index.js", "use": "@vercel/node" }
+  ],
   "routes": [
-
-    {
-      "src": "/convocarMago",
-      "dest": "/index.js",
-      "methods": ["GET"]
-    },
-    {
-      "src": "/dominarEncantamento",
-      "dest": "/index.js",
-      "methods": ["GET"]
-    },
-    {
-      "src": "/examinarPergaminho/:id",
-      "dest": "/index.js",
-      "methods": ["GET"]
-    },
-    {
-      "src": "/elixir",
-      "dest": "/index.js",
-      "methods": ["GET"]
-    },
-    {
-      "src": "/runas",
-      "dest": "/index.js",
-      "methods": ["GET"]
-    }
+    { "src": "/api-docs/(.*)", "dest": "/public/$1" },
+    { "handle": "filesystem" },
+    { "src": "/convocarMago", "dest": "/index.js", "methods": ["GET"] },
+    { "src": "/dominarEncantamento", "dest": "/index.js", "methods": ["GET"] },
+    { "src": "/examinarPergaminho/:id", "dest": "/index.js", "methods": ["GET"] },
+    { "src": "/elixir", "dest": "/index.js", "methods": ["GET"] },
+    { "src": "/runas", "dest": "/index.js", "methods": ["GET"] },
+    { "src": "/", "dest": "/public/swagger.html", "methods": ["GET"] }
   ]
 }
