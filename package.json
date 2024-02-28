@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "commit": "cz",
-    "release": "standard-version"
+    "release": "standard-version",
+    "copy-swagger": "mkdir -p public/swagger && cp node_modules/swagger-ui-dist/* public/swagger/"
   },
   "config": {
     "commitizen": {
@@ -24,6 +25,7 @@
   "devDependencies": {
     "commitizen": "^4.3.0",
     "cz-conventional-changelog": "^3.3.0",
-    "standard-version": "^9.5.0"
+    "standard-version": "^9.5.0",
+    "swagger-ui-dist": "^5.11.8"
   }
 }
