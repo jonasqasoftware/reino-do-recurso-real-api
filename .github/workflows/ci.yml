@@ -46,6 +46,8 @@ jobs:
         run: npm start > /tmp/reino-api.log 2>&1 &
       - name: Wait for readiness
         run: npx wait-on http://127.0.0.1:3000/health
+      - name: Install k6
+        uses: grafana/setup-k6-action@v1
       - name: Run k6 thresholds
         uses: grafana/run-k6-action@v1
         with:
