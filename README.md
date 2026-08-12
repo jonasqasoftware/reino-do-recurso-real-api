@@ -1,89 +1,108 @@
-# API "Reino do Recurso Real"
+# Reino do Recurso Real API
 
-Saudações, nobres desenvolvedores, e bem-vindos ao "Reino do Recurso Real"! Nossa API REST é uma porta para um mundo encantado, onde dados mágicos fluem como um rio de sabedoria. Prepare-se para embarcar em uma jornada de exploração e descobertas, onde os bits e bytes se transformam em feitiços poderosos!
+A small REST API and an evidence-driven **API Quality Engineering case study**. The fantasy domain keeps the data approachable; the engineering focus is risk analysis, executable contracts, negative security testing, performance thresholds, accessibility, CI gates, and observable requests.
 
-## Executando a API
+> Portuguese summary: laboratório de Quality Engineering para APIs, com estratégia baseada em riscos e evidências reproduzíveis. It is a demonstration project, not a production-capacity claim.
 
-### Pré-requisitos
+## What this demonstrates
 
-Antes de começar sua jornada encantada, certifique-se de ter os seguintes artefatos:
+- Risk-based quality strategy with explicit release criteria and residual risk
+- Functional, negative, and OpenAPI contract tests at the HTTP boundary
+- Input validation that prevents path traversal in file-backed resources
+- Structured request-completion logs and request correlation
+- k6 smoke thresholds used as a regression signal
+- Automated Axe accessibility check for the documentation entry page
+- Reproducible CI using a clean lockfile installation
 
-1. **Varinha Mágica (Caso ela não esteja disponível, uma boa xícara de café pode fazer o truque.)**
-2. **Conexão com o Reino da Internet (Wi-Fi, Fibra Mágica, ou qualquer portal confiável).**
-3. **Node.js e npm instalados (disponíveis em [nodejs.org](https://nodejs.org/)).**
+## Run locally
 
-### Passo 1: Clonar o Reino do Recurso Real
-
-Abra um portal de comando e execute o seguinte feitiço para clonar o reino para o seu domínio local:
-
-```bash
-git clone https://github.com/seu-usuario/reino-do-recurso-real-api.git
-```
-
-### Passo 2: Entrar no Reino
-
-Dirija-se para o diretório do reino:
+Requirements: Node.js 20 or newer. CI uses Node.js 24 LTS; Node 20 support is retained for local compatibility.
 
 ```bash
+git clone https://github.com/jonasqasoftware/reino-do-recurso-real-api.git
 cd reino-do-recurso-real-api
+npm ci
+npm start
 ```
 
-### Passo 3: Invocar as Magias Necessárias
+Open the accessible documentation entry page at [http://localhost:3000/](http://localhost:3000/). It links to Swagger UI and the machine-readable contract.
 
-Execute o seguinte comando para invocar as magias e preparar o reino:
+## Quality gates
 
 ```bash
-npm install
+npm run validate
+npm run test:accessibility
 ```
 
-### Passo 4: Iniciar o Portal
-
-Inicie o portal de comando e abra uma porta para o reino:
+Run the optional performance smoke test in a second terminal after starting the API:
 
 ```bash
-node index.js
+k6 run performance/smoke.js
 ```
 
-### Passo 5: Desbravar os Territórios Encantados
+The profile uses 5 virtual users for 15 seconds and requires less than 1% HTTP errors, more than 99% successful checks, and p95 below 300 ms. These thresholds detect regression in a controlled environment; they do not establish production capacity.
 
-Abra o navegador no seu artefato favorito e acesse:
+## API surface
 
-[http://localhost:3000/api-docs](http://localhost:3000/api-docs)
+| Method | Route                     | Purpose                               |
+| ------ | ------------------------- | ------------------------------------- |
+| GET    | `/`                       | Accessible documentation entry point  |
+| GET    | `/health`                 | Readiness signal                      |
+| GET    | `/convocarMago`           | Programming tips                      |
+| GET    | `/dominarEncantamento`    | Data skills                           |
+| GET    | `/examinarPergaminho/:id` | Scroll content by positive numeric ID |
+| GET    | `/elixir`                 | Elixir collection                     |
+| GET    | `/runas`                  | Rune collection                       |
+| GET    | `/openapi.json`           | OpenAPI 3.0 contract                  |
+| GET    | `/api-docs/`              | Interactive Swagger UI                |
 
+## Architecture and decisions
 
-## **Nomes de Rotas e Endpoints:**
+```text
+index.js              Vercel serverless entry point
+src/app.js            Express composition, routes, validation, observability
+src/server.js         Local process entry point
+src/openapi.js        Executable API contract
+tests/                HTTP and contract tests
+performance/          k6 regression profile
+docs/                 Quality strategy and threat model
+```
 
-1. **GET /convocarMago**
-   - *Descrição:* Chame um mago sábio para iluminar o caminho da programação. Este endpoint fornece dicas mágicas e soluções encantadoras para seus dilemas de código. Lembre-se, eles também são ótimos contadores de piadas de programação!
+The API deliberately uses a small functional structure instead of controllers, repositories, or a database. With five read-only resource routes, extra layers would hide behavior without reducing meaningful coupling. Supertest exercises the real Express boundary without a network port, keeping tests fast and isolated.
 
-2. **GET /dominarEncantamento**
-   - *Descrição:* Para os que desejam aprofundar seus conhecimentos, esta rota permite a maestria do encantamento de dados. Desvendem os segredos escondidos nos territórios da programação, onde até os bugs se curvam perante vocês.
+## Quality Strategy
 
-3. **GET /examinarPergaminho/:id**
-   - *Descrição:* Desvende os mistérios de um pergaminho específico no reino, identificado por um ID único. Cada pergaminho contém conhecimentos ancestrais sobre programação, pronto para serem explorados. Cuidado com os pergaminhos mal-humorados, eles podem lançar "bugs" inofensivos!
+The primary risks are arbitrary file access through the scroll identifier, silent contract drift, unavailable critical resources, and undetected latency/error regression. P0 risks block release on any failure. CI runs installation, static analysis, formatting, HTTP integration tests, contract checks, coverage, accessibility, and a k6 profile.
 
-## **Recursos Disponíveis:**
+Detailed traceability:
 
-1. **/elixir**
-   - *Descrição:* Visite a fonte do elixir, onde os desenvolvedores podem saciar sua sede por informações vitais. Transformem dados ordinários em néctar da sabedoria e elevem-se a novos patamares de conhecimento.
+- [Quality strategy](docs/QUALITY_STRATEGY.md)
+- [Threat model](docs/THREAT_MODEL.md)
 
-2. **/runas**
-   - *Descrição:* Explore as runas antigas que guardam os segredos do "Reino do Recurso Real". Cada runa revela uma peça única de conhecimento, desbloqueando a magia oculta nos dados. Cuidado com as runas traquinas, elas podem lançar encantamentos de confusão!
+## Evidence and limitations
 
-## **Tecnologia Utilizada:**
-- Nossa API é alimentada pela magia da linguagem de programação "Encantar". Conhecida por seu poder em conjurar soluções magníficas, ela transforma até mesmo os bugs mais teimosos em borboletas inofensivas. E sim, borboletas são a melhor forma de bugs!
+CI artifacts retain the coverage report for seven days. Commands and results are recorded in the pull request that introduced the quality baseline.
 
-## **Estado dos Códigos:**
+Known limitations:
 
-- **200 OK:** Feitiço bem-sucedido, dados prontos para serem explorados. Preparem-se para desbravar novos territórios de conhecimento!
-  
-- **404 Not Found:** Parece que um dragão comeu esse recurso. Talvez ele tenha apetite por dados não encontrados. Hora de rastrear o dragão!
+- Data is static and file-backed; there is no persistence or write concurrency.
+- There is no authentication or personal data, so authorization tests would be artificial.
+- Local k6 results are not evidence of internet-scale or production performance.
+- Request logs provide correlation, not a full distributed observability platform.
+- Swagger UI is retained as a third-party interactive explorer; the Axe gate targets the owned documentation entry page because the generated Swagger markup has known accessibility violations.
 
-- **500 Internal Server Error:** O feiticeiro cometeu um pequeno deslize. Nada que não possa ser corrigido com um toque de varinha mágica e um pouco de paciência.
+## Technology record
 
-Que a magia da programação esteja sempre ao seu lado, nobres desenvolvedores! Embarquem nesta jornada encantada e que os bugs sejam apenas pequenas criaturas travessas em seu caminho para o sucesso! 🚀🔮✨
+```text
+Tool: Node.js / Express, Jest + Supertest, k6, Playwright + Axe
+Version: Node.js 24 LTS in CI; package versions are locked in package-lock.json
+Test type: API integration, contract, security-negative, accessibility, performance smoke
+Complexity: Small read-only demonstration API
+Architecture: Composed Express app with separate local/serverless entry points
+Reason: Keeps HTTP behavior testable without introducing unused layers
+Official documentation consulted: Node.js release schedule and official GitHub Actions repositories
+```
 
+## License
 
-Aqui você encontrará o mapa completo do reino, detalhando todas as rotas e segredos que o Reino do Recurso Real tem a oferecer!
-
-Agora, com sua varinha mágica em mãos e os feitiços corretos, explore, descubra e encante-se com a API "Reino do Recurso Real"! Que a magia da programação esteja sempre ao seu lado, nobres desenvolvedores! 🚀✨
+[MIT](LICENSE) © 2024 Jonas Davila da Silva.
