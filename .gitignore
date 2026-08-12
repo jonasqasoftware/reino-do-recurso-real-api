@@ -1,13 +1,11 @@
-# Node.js
-npm-debug.log
-
-# Arquivos de configuração
+node_modules/
+coverage/
 .env
-
-# Arquivos de build
-/build/
-
-# Arquivos do sistema operacional
+.env.*
+!.env.example
+.vercel/
+.playwright-browsers/
+.npm-cache/
+npm-debug.log*
 .DS_Store
 Thumbs.db
-.vercel
