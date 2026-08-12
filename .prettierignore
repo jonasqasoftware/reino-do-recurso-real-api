@@ -1,0 +1,8 @@
+node_modules
+coverage
+public
+.playwright-browsers
+.npm-cache
+package-lock.json
+CHANGELOG.md
+data

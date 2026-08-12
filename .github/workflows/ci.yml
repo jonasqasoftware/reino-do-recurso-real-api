@@ -1,0 +1,54 @@
+name: Quality gates
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm run validate
+      - run: npx playwright install --with-deps chromium
+      - run: npm run test:accessibility
+      - name: Archive coverage evidence
+        if: always()
+        uses: actions/upload-artifact@v5
+        with:
+          name: coverage
+          path: coverage/
+          if-no-files-found: ignore
+          retention-days: 7
+
+  performance-smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Start API
+        run: npm start > /tmp/reino-api.log 2>&1 &
+      - name: Wait for readiness
+        run: npx wait-on http://127.0.0.1:3000/health
+      - name: Install k6
+        uses: grafana/setup-k6-action@v1
+      - name: Run k6 thresholds
+        uses: grafana/run-k6-action@v1
+        with:
+          path: performance/smoke.js
