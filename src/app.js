@@ -47,21 +47,21 @@ app.use((request, response, next) => {
 app.get('/health', (_request, response) => response.status(200).json({ status: 'ok' }));
 app.get('/', (_request, response) =>
   response.status(200).type('html').send(`<!doctype html>
-<html lang="en">
+<html lang="pt-BR">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Reino API documentation</title>
+    <title>Documentação da API</title>
   </head>
   <body>
     <main>
       <h1>Reino do Recurso Real API</h1>
-      <p>A risk-based API Quality Engineering case study.</p>
-      <nav aria-label="API documentation">
+      <p>Um estudo de caso de Quality Engineering para APIs, orientado a risco.</p>
+      <nav aria-label="Documentação da API">
         <ul>
-          <li><a href="/api-docs/">Explore the interactive API documentation</a></li>
-          <li><a href="/openapi.json">Download the OpenAPI contract</a></li>
-          <li><a href="/health">Check service readiness</a></li>
+          <li><a href="/api-docs/">Explorar a documentação interativa da API</a></li>
+          <li><a href="/openapi.json">Baixar o contrato OpenAPI</a></li>
+          <li><a href="/health">Verificar a disponibilidade do serviço</a></li>
         </ul>
       </nav>
     </main>
@@ -98,7 +98,7 @@ app.get('/openapi.json', (_request, response) => response.status(200).json(opena
 app.use(
   '/api-docs',
   swaggerUi.serve,
-  swaggerUi.setup(openapi, { customSiteTitle: 'Reino API documentation' }),
+  swaggerUi.setup(openapi, { customSiteTitle: 'Documentação da API' }),
 );
 
 app.use((_request, response) =>
