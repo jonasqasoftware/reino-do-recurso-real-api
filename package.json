@@ -1,7 +1,7 @@
 {
-  "name": "reino-do-recurso-real-api",
+  "name": "api-quality-engineering-lab",
   "version": "2.0.0",
-  "description": "Risk-based API Quality Engineering case study built with Express and OpenAPI.",
+  "description": "Laboratório de Quality Engineering para APIs, com estratégia baseada em risco, construído com Express e OpenAPI.",
   "main": "index.js",
   "scripts": {
     "start": "node src/server.js",

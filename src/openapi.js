@@ -23,16 +23,17 @@ module.exports = {
   info: {
     title: 'Reino do Recurso Real API',
     version: '2.0.0',
-    description: 'A small REST API used as a risk-based API Quality Engineering case study.',
+    description:
+      'Uma pequena API REST usada como estudo de caso de Quality Engineering para APIs, orientado a risco.',
   },
-  servers: [{ url: '/', description: 'Current environment' }],
+  servers: [{ url: '/', description: 'Ambiente atual' }],
   paths: {
     '/health': {
       get: {
-        summary: 'Check service readiness',
+        summary: 'Verifica a disponibilidade do serviço',
         responses: {
           200: {
-            description: 'Service is ready',
+            description: 'Serviço disponível',
             content: {
               'application/json': {
                 schema: {
@@ -47,26 +48,32 @@ module.exports = {
       },
     },
     '/convocarMago': {
-      get: { summary: 'List programming tips', responses: { 200: listResponse('Tips returned') } },
+      get: {
+        summary: 'Lista dicas de programação',
+        responses: { 200: listResponse('Dicas retornadas') },
+      },
     },
     '/dominarEncantamento': {
-      get: { summary: 'List data skills', responses: { 200: listResponse('Skills returned') } },
+      get: {
+        summary: 'Lista habilidades de dados',
+        responses: { 200: listResponse('Habilidades retornadas') },
+      },
     },
     '/elixir': {
-      get: { summary: 'List elixirs', responses: { 200: listResponse('Elixirs returned') } },
+      get: { summary: 'Lista elixires', responses: { 200: listResponse('Elixires retornados') } },
     },
     '/runas': {
-      get: { summary: 'List runes', responses: { 200: listResponse('Runes returned') } },
+      get: { summary: 'Lista runas', responses: { 200: listResponse('Runas retornadas') } },
     },
     '/examinarPergaminho/{id}': {
       get: {
-        summary: 'Get a scroll collection by numeric identifier',
+        summary: 'Obtém uma coleção de pergaminho por identificador numérico',
         parameters: [
           { name: 'id', in: 'path', required: true, schema: { type: 'integer', minimum: 1 } },
         ],
         responses: {
           200: {
-            description: 'Scroll collection returned',
+            description: 'Coleção de pergaminho retornada',
             content: {
               'application/json': {
                 schema: { type: 'object', additionalProperties: { type: 'object' } },
@@ -74,11 +81,11 @@ module.exports = {
             },
           },
           400: {
-            description: 'Identifier is not a positive integer',
+            description: 'Identificador não é um inteiro positivo',
             content: { 'application/json': { schema: { $ref: '#/components/schemas/Error' } } },
           },
           404: {
-            description: 'Scroll was not found',
+            description: 'Pergaminho não encontrado',
             content: { 'application/json': { schema: { $ref: '#/components/schemas/Error' } } },
           },
         },

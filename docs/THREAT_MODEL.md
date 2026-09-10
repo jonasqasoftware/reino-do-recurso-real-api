@@ -1,22 +1,22 @@
-# Lightweight threat model
+# Modelo de Ameaças (leve)
 
-## Scope and assets
+## Escopo e ativos
 
-This demonstration API serves public, static JSON resources. The assets are service availability, response integrity, the OpenAPI contract, and logs that do not leak user input or secrets. It has no authentication, personal data, database, or write endpoint.
+Esta API de demonstração serve recursos JSON públicos e estáticos. Os ativos são disponibilidade do serviço, integridade da resposta, o contrato OpenAPI, e logs que não vazam entrada de usuário nem segredos. Não há autenticação, dado pessoal, banco de dados ou endpoint de escrita.
 
-## Principal risks and controls
+## Principais riscos e controles
 
-| Risk                                         | Impact                                   | Control                                                                | Evidence                  |
-| -------------------------------------------- | ---------------------------------------- | ---------------------------------------------------------------------- | ------------------------- |
-| Path traversal through the scroll identifier | Read unintended local files              | Accept positive integers only and resolve from a fixed directory       | Negative API tests        |
-| Contract drift                               | Consumers receive undocumented responses | OpenAPI contract is exported from application code and contract-tested | `tests/openapi.test.js`   |
-| Framework disclosure                         | Unnecessary reconnaissance data          | Disable `x-powered-by`                                                 | API test                  |
-| Traffic spike                                | Increased latency or unavailability      | Small stateless handlers; performance thresholds detect regression     | k6 smoke profile          |
-| Untraceable failures                         | Slow incident diagnosis                  | Propagate or generate `x-request-id`; structured completion log        | API test and runtime logs |
+| Risco                                            | Impacto                                         | Controle                                                                      | Evidência                      |
+| ------------------------------------------------ | ----------------------------------------------- | ----------------------------------------------------------------------------- | ------------------------------ |
+| Path traversal via o identificador do pergaminho | Leitura de arquivos locais não pretendidos      | Aceitar somente inteiros positivos e resolver a partir de um diretório fixo   | Testes negativos de API        |
+| Divergência de contrato                          | Consumidores recebem respostas não documentadas | O contrato OpenAPI é exportado do código da aplicação e testado como contrato | `tests/openapi.test.js`        |
+| Vazamento de informação do framework             | Dado desnecessário de reconhecimento            | Desabilitar `x-powered-by`                                                    | Teste de API                   |
+| Pico de tráfego                                  | Aumento de latência ou indisponibilidade        | Handlers pequenos e stateless; limites de performance detectam regressão      | Perfil de smoke k6             |
+| Falhas não rastreáveis                           | Diagnóstico lento de incidente                  | Propagar ou gerar `x-request-id`; log estruturado de conclusão                | Teste de API e logs de runtime |
 
-## Residual risks
+## Riscos residuais
 
-- Rate limiting and distributed tracing are intentionally absent because there is no production infrastructure or authenticated workload.
-- Static JSON is loaded by the process. A much larger dataset would require a storage strategy and capacity test.
-- The k6 profile is a local regression signal, not evidence of production capacity.
-- Dependency and platform vulnerabilities remain subject to continuous scanning and maintenance.
+- Rate limiting e tracing distribuído estão deliberadamente ausentes porque não há infraestrutura de produção nem carga autenticada.
+- O JSON estático é carregado pelo processo. Um dataset muito maior exigiria uma estratégia de armazenamento e teste de capacidade.
+- O perfil k6 é um sinal local de regressão, não evidência de capacidade de produção.
+- Vulnerabilidades de dependência e de plataforma permanecem sujeitas a varredura e manutenção contínuas.
