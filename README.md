@@ -1,5 +1,13 @@
 # API Quality Engineering Lab
 
+<p align="center">
+  <img src="docs/brand/social-preview.png" alt="Jonas Davila: engenharia de qualidade com evidência, clareza e método" width="100%">
+</p>
+
+[![CI](https://github.com/jonasqasoftware/api-quality-engineering-lab/actions/workflows/ci.yml/badge.svg)](https://github.com/jonasqasoftware/api-quality-engineering-lab/actions/workflows/ci.yml) [![License: MIT](https://img.shields.io/badge/license-MIT-1e2024.svg)](LICENSE) [![Jonas Davila](https://img.shields.io/badge/portfolio-jonasdavila.com.br-a8432f.svg)](https://jonasdavila.com.br/en/)
+
+> **In English:** A small REST API and an evidence-driven API Quality Engineering case study: risk analysis, executable OpenAPI contracts, negative security tests, k6 performance thresholds, accessibility checks and CI gates. A demonstration project, not a production claim.
+
 **Laboratório de Quality Engineering para APIs**
 
 Uma pequena API REST e um **estudo de caso de API Quality Engineering** orientado a evidências. O domínio de fantasia ("Reino do Recurso Real") mantém os dados simples e fáceis de acompanhar; o foco de engenharia está em análise de risco, contratos executáveis, testes negativos de segurança, limites de performance, acessibilidade, gates de CI e requisições observáveis.
